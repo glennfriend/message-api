@@ -55,6 +55,8 @@ $factoryApplication = function()
     $loader->registerClasses(array(
         'File_CSV_DataSource'   => $appPath .'/vendors/csv_parser/File_CSV_DataSource.php',
         'SqlFormatter'          => $appPath .'/vendors/csv_parser/SqlFormatter.php',
+        'PHPMailer'             => $appPath .'/vendors/PHPMailer/class.phpmailer.php',
+        
     ));
     $loader->registerNamespaces(array(
         'HipChat'               => $appPath .'/vendors/HipChat/',
