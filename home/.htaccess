@@ -1,12 +1,10 @@
 ##################################################
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /msg
+    RewriteBase /message
 
     RewriteCond %{REMOTE_HOST} !^127\.0\.0\.1
     RewriteCond %{REMOTE_HOST} !^192\.168\.
-    RewriteCond %{REMOTE_HOST} !^203\.75\.167\.229
-    RewriteCond %{REMOTE_HOST} !^203\.75\.167\.231
 
     RewriteCond %{REQUEST_URI} !hello-world.html$
     RewriteRule ^(.*)$ hello-world.html [R=302,L]
