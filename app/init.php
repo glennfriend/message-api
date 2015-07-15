@@ -53,15 +53,13 @@ $factoryApplication = function()
         $appPath .'/'. APP_PORTAL .'_mods/components/',
     ));
     $loader->registerClasses(array(
-        'File_CSV_DataSource'   => $appPath .'/vendors/csv_parser/File_CSV_DataSource.php',
-        'SqlFormatter'          => $appPath .'/vendors/csv_parser/SqlFormatter.php',
-        'PHPMailer'             => $appPath .'/vendors/PHPMailer/class.phpmailer.php',
+        'SqlFormatter'  => $appPath .'/vendors/csv_parser/SqlFormatter.php',
+        'PHPMailer'     => $appPath .'/vendors/PHPMailer/class.phpmailer.php',
         
     ));
     $loader->registerNamespaces(array(
-        'HipChat'               => $appPath .'/vendors/HipChat/',
-        'Whoops'                => $appPath .'/vendors/whoops/',
-        'Blocks'                => $appPath .'/'. APP_PORTAL .'_mods/blocks/',
+        'HipChat'       => $appPath .'/vendors/HipChat/',
+        'Blocks'        => $appPath .'/'. APP_PORTAL .'_mods/blocks/',
     ));
     $loader->register();
 
