@@ -1,0 +1,30 @@
+############################################
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /msg
+
+    RewriteCond %{REMOTE_HOST} !^127\.0\.0\.1
+    RewriteCond %{REMOTE_HOST} !^192\.168\.
+    RewriteCond %{REMOTE_HOST} !^203\.75\.167\.229
+    RewriteCond %{REMOTE_HOST} !^203\.75\.167\.231
+
+    RewriteCond %{REQUEST_URI} !hello-world.html$
+    RewriteRule ^(.*)$ hello-world.html [R=302,L]
+</IfModule>
+
+# linux
+# -> .htaccess
+# -> .git
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+    Satisfy all
+</FilesMatch>
+
+# ~ tag
+# -> index.php~
+<FilesMatch "~">
+    Order allow,deny
+    Deny from all
+    Satisfy all
+</FilesMatch>
