@@ -32,7 +32,7 @@
     define('APP_DB_MYSQL_HOST', 'localhost'     );
     define('APP_DB_MYSQL_USER', 'root'          );
     define('APP_DB_MYSQL_PASS', ''              );
-    define('APP_DB_MYSQL_DB',   'msg'           );
+    define('APP_DB_MYSQL_DB',   'message'       );
 
     /**
      *  default items per page
