@@ -56,7 +56,9 @@ $factoryApplication = function()
     $basePath = Config::get('app.base.path');
     $appPath = $basePath . '/app';
 
+    //
     // Register an autoloader
+    //
     $loader = new \Phalcon\Loader();
     $loader->registerDirs(array(
         $appPath .'/event/',
@@ -73,16 +75,25 @@ $factoryApplication = function()
     ));
     $loader->registerClasses(array(
         'SqlFormatter'  => $appPath .'/vendors/csv_parser/SqlFormatter.php',
-        'PHPMailer'     => $appPath .'/vendors/PHPMailer/class.phpmailer.php',
-        
     ));
     $loader->registerNamespaces(array(
-        'HipChat'       => $appPath .'/vendors/HipChat/',
         'Blocks'        => $appPath .'/'. APP_PORTAL .'_mods/blocks/',
     ));
     $loader->register();
 
+    //
+    // composer autoload
+    //
+    $composer = $basePath . "/composer/vendor/autoload.php";
+    if ( !file_exists($composer) ) {
+        echo 'autoload not found2';
+        exit;
+    }
+    require $composer;
+
+    //
     // start and get application
+    //
     $app = require( $appPath .'/'. APP_PORTAL . '_mods/setting/start.php' );
 
     // url() helper function
