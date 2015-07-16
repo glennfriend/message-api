@@ -25,7 +25,7 @@ class GoEmail
 
         $txt = $this->createSendTxt($from, $to, $content);
 
-        $url   = Config::get('app.private_url') . '/send-mail-by-file.php';
+        $url   = Config::get('app.private_url') . '/go-email-by-file';
         $param = '?do=' . basename($txt);
         file_get_contents($url.$param);
 
