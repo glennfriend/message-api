@@ -42,7 +42,7 @@ class BaseBlock
         }
 
         $blockName = $classNames[1];
-        $file = APP_BASE_PATH . '/app/'. APP_PORTAL .'_mods/blocks/'. $blockName . '/template.php';
+        $file = \Config::get('app.base.path') . '/app/'. APP_PORTAL .'_mods/blocks/'. $blockName . '/template.php';
         if ( !file_exists($file) ) {
             return null;
         }

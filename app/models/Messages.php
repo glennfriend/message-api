@@ -150,7 +150,7 @@ class Messages extends ZendModel
         $opt += array(
             '_order'        => 'id DESC',
             '_page'         => 1,
-            '_itemsPerPage' => APP_ITEMS_PER_PAGE
+            '_itemsPerPage' => Config::get('db.items_per_page')
         );
         return $this->findMessagesReal( $opt );
     }

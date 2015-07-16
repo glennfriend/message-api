@@ -45,11 +45,11 @@ class Config
      *  @param int|string - $key
      *  @return any
      */
-    static public function get( $key, $error='config not found!' )
+    static public function get( $key )
     {
         $value = self::soft($key);
         if ( null === $value ) {
-            throw new Exception("Error: {$error} - [{$key}]");
+            throw new Exception("Error: config [{$key}] not found!");
         }
         return $value;
     }

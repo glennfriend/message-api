@@ -1,6 +1,5 @@
 <?php
 
-//error_reporting(E_ALL ^ E_NOTICE);
 error_reporting(-1);
 ini_set('html_errors','Off');
 ini_set('display_errors','Off');
@@ -10,32 +9,52 @@ if ( !extension_loaded('phalcon') ) {
     exit;
 }
 
-$configFile = realpath(__DIR__.'/config/config.php' ) or die('Please setting "config.php" file');
-require_once($configFile);
+require_once 'components/manager/Config.php';
+$configPath = __DIR__.'/config';
+if ( !Config::init($configPath) ) {
+    echo 'Please setting config path & file';
+    exit;
+}
+
+// remove it
+//$configFile = $configPath.'/config.php' or die('Please setting "config.php" file');
+//require_once($configFile);
+// remove ↑
 
 // developer mode
-if ('dev'===APP_ENVIRONMENT) {
+if ('dev'===Config::get('app.env')) {
     error_reporting(E_ALL);
     ini_set('html_errors','On');
     ini_set('display_errors','On');
+    ini_set('log_errors','On');
 }
+
+date_default_timezone_set( Config::get('app.timezone') );
+ini_set( 'date.timezone',  Config::get('app.timezone') );
+
+// PHP 5.6 setting to php.ini
+if ( phpversion() > '5.6' ) {
+    ini_set('default_charset', 'UTF-8');
+}
+
+/* ================================================================================
+    debug
+================================================================================ */
 /*
-if ('127.0.0.1'===$_SERVER['REMOTE_ADDR']) {
+if ( 0===strpos($_SERVER['REMOTE_ADDR'], '127.0.0.1') ) {
     error_reporting(E_ALL);
     ini_set('html_errors','On');
     ini_set('display_errors','On');
 }
 */
 
-require_once('helper.php');
-
-
 /**
  *  init
  */
 $factoryApplication = function()
 {
-    $appPath = APP_BASE_PATH . '/app';
+    $basePath = Config::get('app.base.path');
+    $appPath = $basePath . '/app';
 
     // Register an autoloader
     $loader = new \Phalcon\Loader();
@@ -70,8 +89,8 @@ $factoryApplication = function()
     RegisterManager::set('url', $app->url );
 
     //
-    LogBrg::init(   APP_BASE_PATH .'/var/log'   );
-    CacheBrg::init( APP_BASE_PATH .'/var/cache' );
+    LogBrg::init(   $basePath .'/var/log'   );
+    CacheBrg::init( $basePath .'/var/cache' );
 
     // custom
     $customLoader = function( $appPath, $di ) {
@@ -80,15 +99,14 @@ $factoryApplication = function()
     $customLoader($appPath, $app->getDi() );
     unset($customLoader);
 
-
     // event init
-    Ydin\Event::init( APP_BASE_PATH . '/app/event' );
+    Ydin\Event::init( $basePath .'/app/event' );
 
     // init footer
     Ydin\Event::notify('init_footer', array('app'=>$app) );
 
+    //
+    require_once('helper.php');
 
     return $app;
 };
-
-

@@ -12,10 +12,10 @@ class SessionBrgFile
      */
     public function init( $di )
     {
-        session_save_path( APP_BASE_PATH . '/var/session' );
+        session_save_path( Config::get('app.base.path') . '/var/session' );
 
         $session = new Phalcon\Session\Adapter\Files(array(
-            'uniqueId' => APP_PRIVATE_DYNAMIC_CODE
+            'uniqueId' => Config::get('app.private_dynamic_code')
         ));
         $session->start();
 

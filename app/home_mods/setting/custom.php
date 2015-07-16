@@ -8,13 +8,14 @@
      */
     $zendLoader = function()
     {
-        require_once APP_BASE_PATH . '/app/vendors/Zend/Loader/StandardAutoloader.php';
+        $basePath = Config::get('app.base.path');
+        require_once $basePath . '/app/vendors/Zend/Loader/StandardAutoloader.php';
         
         $loader = new Zend\Loader\StandardAutoloader(array(
             'autoregister_zf' => true,
             'namespaces' => array(
-                'Ydin'    => APP_BASE_PATH . '/app/vendors/Ydin',
-                'Imagine' => APP_BASE_PATH . '/app/vendors/Imagine',
+                'Ydin'    => $basePath . '/app/vendors/Ydin',
+                'Imagine' => $basePath . '/app/vendors/Imagine',
             ),
         ));
         $loader->register();
