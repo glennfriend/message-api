@@ -8,7 +8,7 @@
  *      - 內容的時間是建立 message 的時間, 不是寄送時間 (如果是正常發送, 兩者差別不大)
  *
  *  sample:
- *      curl -X POST "https://localhost/msg/?room=go-email&from=me&to=me@hotmail.com" -d c="hello world!"
+ *      curl -X POST "https://localhost/msg/?c=go-email&from=me&to=me@hotmail.com" -d m="hello world!"
  *
  */
 class GoEmail
@@ -18,14 +18,13 @@ class GoEmail
     {
         $from    = isset($params['from']) ? $params['from'] : '';
         $to      = isset($params['to'])   ? $params['to']   : '';
-        $content = isset($params['c'])    ? $params['c']    : '';
+        $message = isset($params['m'])    ? $params['m']    : '';
 
         $from = preg_replace('/[^a-zA-Z0-9_\-\@\.]+/', '', $from );
         $to   = preg_replace('/[^a-zA-Z0-9_\-\@\.]+/', '', $to   );
 
-        $txt = $this->createSendTxt($from, $to, $content);
-
-        $url   = Config::get('app.private_url') . '/go-email-by-file';
+        $txt = $this->createSendTxt($from, $to, $message);
+        $url   = Config::get('app.private_url') . '/go-email-by-file.php';
         $param = '?do=' . basename($txt);
         file_get_contents($url.$param);
 
@@ -48,7 +47,7 @@ class GoEmail
      *  另外呼叫其它程式去執行
      *  該發送方式 不需要 等待發送 的 時間
      */
-    private function createSendTxt($from, $to, $content)
+    private function createSendTxt($from, $to, $message)
     {
 
         $mailContentFooter = "\n--------------------\n"
@@ -59,7 +58,7 @@ class GoEmail
         $info = array(
             'from'      => $from,
             'to'        => $to,
-            'content'   => $content,
+            'message'   => $message,
             'footer'    => $mailContentFooter,
         );
 

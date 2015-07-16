@@ -5,7 +5,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主機: localhost
--- 產生時間： 2015 年 07 月 14 日 08:32
+-- 產生時間： 2015 年 07 月 16 日 07:54
 -- 伺服器版本: 5.5.43-0ubuntu0.14.04.1
 -- PHP 版本： 5.6.6
 
@@ -30,9 +30,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `messages` (
   `id` int(11) NOT NULL,
-  `room` varchar(16) NOT NULL,
-  `category` varchar(32) NOT NULL,
-  `content` text NOT NULL,
+  `channel` varchar(32) NOT NULL,
+  `message` text NOT NULL,
   `properties` text NOT NULL,
   `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -46,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
 --
 ALTER TABLE `messages`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `room` (`room`);
+  ADD KEY `channel` (`channel`) USING BTREE;
 
 --
 -- 在匯出的資料表使用 AUTO_INCREMENT
@@ -57,4 +56,3 @@ ALTER TABLE `messages`
 --
 ALTER TABLE `messages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-

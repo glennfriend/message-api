@@ -30,16 +30,18 @@ try {
 // request
 // --------------------------------------------------------------------------------
 $params = array(
-    'room'      => '',
-    'category'  => '',
-    'c'         => '',
+    'c' => '',  // channel
+    'm' => '',  // message
 );
 $params = assignParams($_GET, $params);
 $params = assignParams($_POST, $params);
 $params = filterParams($params);
 
-if ( !$params['room'] ) {
+if ( !$params['c'] ) {
     display(101);
+}
+if ( !$params['m'] ) {
+    display(102);
 }
 
 // --------------------------------------------------------------------------------
@@ -47,23 +49,21 @@ if ( !$params['room'] ) {
 // --------------------------------------------------------------------------------
 //pr($params); exit;
 
-if ( $nowFile = getNowFile($params['room']) ) {
+if ( $nowFile = getNowFile($params['c']) ) {
     // 收到訊息立即執行, "不會" 把資料寫入 database
     include $nowFile;
 
-    $class = ucfirst($params['room']);
+    $class = ucfirst($params['c']);
     $now = new $class();
     $now->perform($params);
 }
 else {
     // 收到訊息寫入 database
     $message = new Message();
-    $message->setRoom     ( $params['room'] );
-    $message->setCategory ( $params['category'] );
-    $message->setContent  ( $params['c'] );
-    unset($params['room']);
-    unset($params['category']);
+    $message->setChannel( $params['c'] );
+    $message->setMessage( $params['m'] );
     unset($params['c']);
+    unset($params['m']);
 
     foreach ( $params as $key => $value ) {
         if ( is_string($value) || is_number($value) ) {
@@ -102,14 +102,13 @@ function assignParams( $arr, $params )
  */
 function filterParams($params)
 {
-    $originRoom = preg_replace('/[^a-z0-9-]+/', '', strtolower(trim($params['room'])) );
-    $room = '';
-    foreach ( explode('-', $originRoom) as $str ) {
-        $room .= ucfirst($str);
+    $originString = preg_replace('/[^a-z0-9-]+/', '', strtolower(trim($params['c'])) );
+    $channel = '';
+    foreach ( explode('-', $originString) as $str ) {
+        $channel .= ucfirst($str);
     }
 
-    $params['room']     = $room;
-    $params['category'] = strtolower($params['category']);
+    $params['c'] = $channel;
     return $params;
 }
 

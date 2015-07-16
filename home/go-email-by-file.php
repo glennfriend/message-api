@@ -24,7 +24,7 @@ try {
 // --------------------------------------------------------------------------------
 $file = getFile();
 $info = parseFile($file);
-$result = sendEmail( $info->from, $info->to, $info->content, $info->footer );
+$result = sendEmail( $info->from, $info->to, $info->message, $info->footer );
 $result = true;
 if ( $result ) {
     removeFile($file);
@@ -64,7 +64,7 @@ function parseFile($file)
     }
     if (    !isset($info->from    )
          || !isset($info->to      )
-         || !isset($info->content )
+         || !isset($info->message )
          || !isset($info->footer  ) ) {
         // 格式不正確
         exit;
@@ -72,14 +72,14 @@ function parseFile($file)
     return $info;
 }
 
-function sendEmail($from, $to, $content, $footer)
+function sendEmail($from, $to, $message, $footer)
 {
     $mail = new PHPMailer;
     $mail->CharSet  = "utf-8";  
     $mail->From     = 'message-api@localhost';
     $mail->FromName = 'Message-API';
     $mail->Subject  = "{$from} to you";
-    $mail->Body     = $content . $footer;
+    $mail->Body     = $message . $footer;
     $mail->addAddress($to);
     $mail->isHTML(false);
 

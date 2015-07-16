@@ -26,9 +26,8 @@ class Messages extends ZendModel
     {
         $object = new Message();
         $object->setId         ( $row['id']                      );
-        $object->setRoom       ( $row['room']                    );
-        $object->setCategory   ( $row['category']                );
-        $object->setContent    ( $row['content']                 );
+        $object->setChannel    ( $row['channel']                 );
+        $object->setMessage    ( $row['message']                 );
         $object->setProperties ( unserialize($row['properties']) );
         $object->setCreateTime ( strtotime($row['create_time'])  );
         return $object;
@@ -179,14 +178,11 @@ class Messages extends ZendModel
         $opt = ZendModelHelper::fieldValueNullToEmpty($opt);
         $select = $this->getDbSelect();
 
-        if ( isset($opt['room']) ) {
-            $select->where->and->equalTo( 'room', $opt['room'] );
+        if ( isset($opt['channel']) ) {
+            $select->where->and->equalTo( 'channel', $opt['channel'] );
         }
-        if ( isset($opt['category']) ) {
-            $select->where->and->equalTo( 'category', $opt['category'] );
-        }
-        if ( isset($opt['content']) ) {
-            $select->where->and->like('content', '%'.$opt['content'].'%' );
+        if ( isset($opt['message']) ) {
+            $select->where->and->like('message', '%'.$opt['message'].'%' );
         }
         if ( isset($opt['createTime']) ) {
             $select->where->and->equalTo( 'create_time', $opt['createTime'] );

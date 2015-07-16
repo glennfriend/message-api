@@ -20,23 +20,17 @@ class Message extends BaseObject
                 'storage' => 'getId',
                 'field'   => 'id',
             ),
-            'room' => array(
+            'channel' => array(
                 'type'    => 'string',
                 'filters' => array('strip_tags','trim'),
-                'storage' => 'getRoom',
-                'field'   => 'room',
+                'storage' => 'getChannel',
+                'field'   => 'channel',
             ),
-            'category' => array(
+            'message' => array(
                 'type'    => 'string',
                 'filters' => array('strip_tags','trim'),
-                'storage' => 'getCategory',
-                'field'   => 'category',
-            ),
-            'content' => array(
-                'type'    => 'string',
-                'filters' => array('strip_tags','trim'),
-                'storage' => 'getContent',
-                'field'   => 'content',
+                'storage' => 'getMessage',
+                'field'   => 'message',
             ),
             'properties' => array(
                 'type'    => 'string',
@@ -53,24 +47,6 @@ class Message extends BaseObject
             ),
         );
     }
-
-    // /**
-    //  *  reset value
-    //  */
-    // public function resetValue()
-    // {
-    //     parent::resetValue();
-    // }
-
-    /**
-     *  validate
-     *  @return messages array()
-
-    public function validate()
-    {
-        return array();
-    }
-     */
 
     /* ------------------------------------------------------------------------------------------------------------------------
         basic method rewrite or extends
