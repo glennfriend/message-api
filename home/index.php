@@ -4,7 +4,7 @@ define('APP_PORTAL','home');
 
 try {
 
-    require_once '../app/init.php';
+    require_once __DIR__ . '/../app/init.php';
     $app = $factoryApplication();
 
 } catch( \Phalcon\Exception $e ) {

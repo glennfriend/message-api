@@ -82,6 +82,10 @@
      */
     define('APP_HOME_URI', '/message' );
 
+    /**
+     *  對內部呼叫的網址
+     */
+    define('APP_PRIVATE_URL', 'https://localhost/message' );
 
     /* ================================================================================
         Hipchat API
