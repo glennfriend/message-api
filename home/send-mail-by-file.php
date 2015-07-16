@@ -45,7 +45,7 @@ function getFile()
     }
     $do = $_GET['do'];
 
-    $file = APP_BASE_PATH . '/var/go-email/'.$do;
+    $file = Config::get('app.base.path') . '/var/go-email/'.$do;
     if ( !file_exists($file) ) {
         // 目標檔案不存在
         exit;

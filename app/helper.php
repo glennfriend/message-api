@@ -129,7 +129,7 @@ function cc()
     $args    = func_get_args();
     $func    = $args[0];
 
-    include_once( APP_BASE_PATH . '/app/components/ccHelper/'. $func .'.php');
+    include_once( Config::get('app.base.path') . '/app/components/ccHelper/'. $func .'.php');
     $functionName = 'ccHelper_'. $func;
 
     switch( $numArgs )

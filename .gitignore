@@ -10,6 +10,6 @@ var/cache/*
 var/go-email/*
 var/log/*
 var/session/*
-app/config/config.php
+app/config/*.php
 home/media/*
 

@@ -9,11 +9,10 @@ try {
 
 } catch( \Phalcon\Exception $e ) {
 
-    if ( !UserManager::isDeveloper() && 'dev'!==APP_ENVIRONMENT ) {
+    if ( 'dev'!==Config::get('app.env') ) {
         echo "<h1>Page not found: 804001</h1>";
         exit;
     }
-
     echo "PhalconException: ", $e->getMessage();
     echo '<p>';
     echo    nl2br(htmlentities( $e->getTraceAsString() ));
@@ -131,7 +130,7 @@ function display($errorId)
  */
 function getNowFile($fileName)
 {
-    $nowFile = APP_BASE_PATH . '/app/now/' . $fileName . '.php';
+    $nowFile = Config::get('app.base.path') . '/app/now/' . $fileName . '.php';
     if ( !file_exists($nowFile) ) {
         return false;
     }

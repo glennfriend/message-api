@@ -25,12 +25,12 @@ class GoEmail
 
         $txt = $this->createSendTxt($from, $to, $content);
 
-        $url   = APP_PRIVATE_URL . '/send-mail-by-file.php';
+        $url   = Config::get('app.private_url') . '/send-mail-by-file.php';
         $param = '?do=' . basename($txt);
         file_get_contents($url.$param);
 
         /*
-        $command = APP_BASE_PATH . '/app/bin/send-mail-by-file.php';
+        $command = Config::get('app.base.path') . '/app/bin/send-mail-by-file.php';
         $call = "php {$command} {$txt} > /dev/null 2>&1 &";
         //$call = "phpbrew init; source ~/.phpbrew/bashrc; phpbrew switch php-5.6.6; /root/.phpbrew/php/php-5.6.6/bin/php {$command} {$txt} ";
         //$call = "at now <<< \"/root/.phpbrew/php/php-5.6.6/bin/php -q {$command} {$txt} \"";
@@ -66,7 +66,7 @@ class GoEmail
         $prefix =  preg_replace('/[^a-zA-Z0-9_\@\-]+/', '', $to ) . '-';
         $id = uniqid($prefix) . '.txt';
 
-        $txt = APP_BASE_PATH . '/var/go-email/' . $id;
+        $txt = Config::get('app.base.path') . '/var/go-email/' . $id;
         file_put_contents( $txt, json_encode($info) );
         return $txt;
     }

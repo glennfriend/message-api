@@ -24,7 +24,7 @@ function ccHelper_appConfig( $type='public' )
         'portal'    => APP_PORTAL,
      // 'baseUri'   => Yii::app()->baseUrl ,
      // 'themeUri'  => Yii::app()->baseUrl . '/themes' ,
-        'homeUri'   => APP_HOME_URI ,
+        'homeUri'   => Config::get('app.home.uri'),
         'httpHost'  => $_SERVER['HTTP_HOST'] ,
     );
 

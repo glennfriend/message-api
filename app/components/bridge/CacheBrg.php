@@ -21,7 +21,7 @@ class CacheBrg
         // Frontend: 主要負責檢查KEY是否過期
         // 以及 在存儲到backend之前 / 從backend取數據之后執行額外的數據轉換
         $frontCache = new Phalcon\Cache\Frontend\Data(array(
-            "lifetime" => APP_CACHE_LIFETIME
+            "lifetime" => Config::get('cache.lifetime')
         ));
 
         $cache = new CacheBrgFile();

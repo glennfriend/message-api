@@ -9,9 +9,9 @@
     // url
     $di->set('escaper', new Phalcon\Escaper );
     $di->set('url', new Phalcon\Mvc\Url );
-    $di->get('url')->setBaseUri( APP_HOME_URI .'/' );
-    UrlManager::init(array(
-        'baseUri' => APP_HOME_URI
+    $di->get('url')->setBaseUri( Config::get('app.home.uri') .'/' );
+    Url::init(array(
+        'baseUri' => Config::get('app.home.uri')
     ));
 
 
@@ -27,65 +27,22 @@
     // response
     $di->set('response', new Phalcon\Http\Response );
 
-
     // view component
     $di->set('view', function() {
         $view = new Phalcon\Mvc\View;
-        $view->setViewsDir( APP_BASE_PATH . '/app/'. APP_PORTAL .'_mods/views/' );
+        $view->setViewsDir( Config::get('app.base.path') . '/app/'. APP_PORTAL .'_mods/views/' );
         return $view;
     });
 
     //
     $di->set('dispatcher', new Phalcon\Mvc\Dispatcher );
 
-    //
-    /*
-    $di->set('db', function() {
-        return new Phalcon\Db\Adapter\Pdo\Mysql(array(
-            "host"      => APP_DB_MYSQL_HOST,
-            "username"  => APP_DB_MYSQL_USER,
-            "password"  => APP_DB_MYSQL_PASS,
-            "dbname"    => APP_DB_MYSQL_DB,
-        ));
-    });
-    */
-
-
-    /*
-    $di->set('cookies', function() {
-        $cookies = new Phalcon\Http\Response\Cookies();
-        $cookies->useEncryption(false);
-        return $cookies;
-    });
-    */
-
-
     $di->set('router', function () {
-        require APP_BASE_PATH . '/app/'. APP_PORTAL .'_mods/setting/router.php';
+        require Config::get('app.base.path') . '/app/'. APP_PORTAL .'_mods/setting/router.php';
         return $router;
     });
 
-
     InputBrg::init($di);
-
-
-    /*
-        $translation = function()
-        {
-            $language = $this->request->getBestLanguage();
-            if (file_exists("app/messages/".$language.".php")) {
-                require "app/messages/".$language.".php";
-            } else {
-                require "app/messages/en.php";
-            }
-
-            $message = new \Phalcon\Translate\Adapter\NativeArray(array(
-               "content" => $messages
-            ));
-        }
-        $message = $translation();
-    */
-
 
     //Handle the request
     return new Phalcon\Mvc\Application($di);
