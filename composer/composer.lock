@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "959138a11a3326b93fbefb9aa8d10713",
+    "hash": "44c513a7dbdb32c167f66819d4ebfda6",
     "packages": [
         {
             "name": "gorkalaucirica/hipchat-v2-api-client",
