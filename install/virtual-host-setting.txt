@@ -1,0 +1,14 @@
+※注意! 再次提醒, 本程式為 localhost only, 且必須要設定為 HTTPS
+
+參考 apache conf
+vi /etc/apache2/sites-available/default-ssl.conf 
+
+        Alias /message /var/www/message-api/home
+        <Directory "/var/www/message-api/home">
+            Options FollowSymLinks
+            AllowOverride All
+            Order allow,deny
+            Allow from 127.0.0.1
+            Allow from 你的IP位置
+        </Directory>
+

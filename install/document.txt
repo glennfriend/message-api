@@ -1,0 +1,23 @@
+document 使用手冊
+
+    send to Hipchat
+
+        c (channel) : go-hipchat
+        m (message) : 
+        room        : hipchat room
+        color       : red  or  %23FF0000
+        bgcolor     : yellow, green, red, purple, gray, random
+
+        sample:
+            https://localhost/message/?c=go-hipchat&room=test&m=hi
+
+    send to Email
+
+        - 無等待時間: 發送內容先寫到 txt 檔案, 再利用 curl 發送
+        - 無法第一時間確認是否有成功寄出
+        - 內容的時間是建立 message 的時間, 不是寄送時間 (如果是正常發送, 兩者差別不大)
+
+        sample:
+            https://localhost/message/?c=go-email&from=me&to=me@hotmail.com&m=hi
+
+

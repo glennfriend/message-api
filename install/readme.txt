@@ -47,18 +47,6 @@ Q&A
         因為該程式在 virtual host 或 htaccess 有擋 ip
         所以你可以利用 /etc/hosts 編輯自己的位置
 
-    參考 apache conf
-    vi /etc/apache2/sites-available/default-ssl.conf 
-
-        Alias /message /var/www/message-api/home
-        <Directory "/var/www/message-api/home">
-            Options FollowSymLinks
-            AllowOverride All
-            Order allow,deny
-            Allow from 127.0.0.1
-            Allow from 你的IP位置
-        </Directory>
-
 
 ※注意! 再次提醒, 本程式為 localhost only
 程式主要結構
@@ -79,34 +67,4 @@ Q&A
         => 在 now/ 之外的訊息會累積至資料庫
            通常可以 對一段時間內的資料 做 資料統計, 數量統計
            程式請由 cronjob 呼叫, 或自行執行 "php app/shell/hello.php"
-
-
-
-document
-
-    send to Hipchat
-
-        c (channel) : go-hipchat
-        m (message) : 
-        room        : hipchat room
-        color       : red  or  %23FF0000
-        bgcolor     : yellow, green, red, purple, gray, random
-
-        sample:
-            https://localhost/message/?c=go-hipchat&room=test&m=hi
-
-    send to Email
-
-        - 無等待時間: 發送內容先寫到 txt 檔案, 再利用 curl 發送
-        - 無法第一時間確認是否有成功寄出
-        - 內容的時間是建立 message 的時間, 不是寄送時間 (如果是正常發送, 兩者差別不大)
-
-        sample:
-            https://localhost/message/?c=go-email&from=me&to=me@hotmail.com&m=hi
-
-
-
-
-
-
 
