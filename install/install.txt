@@ -1,10 +1,29 @@
 
-install phalcon by phpbrew
+建立目錄
 
-    option one
-        phpbrew ext install phalcon
-        phpbrew ext install https://github.com/phalcon/cphalcon
-        phpbrew ext install git@github.com:phalcon/cphalcon.git
+    mkdir var/cache
+    chmod -R 777 var/
 
-    enable
-        phpbrew ext enable phalcon
+設定檔
+
+    cp app/config/template/* app/config/
+    編輯所有的設定檔
+
+設定 virtual host
+※注意! 本程式為 localhost only, 且必須要設定為 HTTPS
+
+    vi /etc/apache2/sites-available/default-ssl.conf 
+
+        Alias /message /var/www/message-api/home
+        <Directory "/var/www/message-api/home">
+            Options FollowSymLinks
+            AllowOverride All
+            Order allow,deny
+            Allow from 127.0.0.1
+            Allow from 你的IP位置
+        </Directory>
+
+測試
+
+    https://localhost/message/?c=test&m=hi
+    
