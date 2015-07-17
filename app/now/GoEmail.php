@@ -1,15 +1,7 @@
 <?php
 
-
 /**
- *  立即發送 email
- *      - 無等待時間: 發送內容先寫到 txt 檔案, 再利用 linux console 發送
- *      - 無法第一時間確認是否有成功寄出
- *      - 內容的時間是建立 message 的時間, 不是寄送時間 (如果是正常發送, 兩者差別不大)
- *
- *  sample:
- *      curl -X POST "https://localhost/msg/?c=go-email&from=me&to=me@hotmail.com" -d m="hello world!"
- *
+ *  請查閱 document
  */
 class GoEmail
 {

@@ -5,7 +5,7 @@ class HelloTest
 
     public function perform( array $params )
     {
-        pr($params);
+        print_r($params);
     }
 
 
