@@ -10,4 +10,3 @@ Disallow: /*.pdf
 
 Disallow: /dist/
 Disallow: /media/
-Disallow: /modules/

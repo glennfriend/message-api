@@ -37,7 +37,7 @@ return [
      *  home uri
      */
     'home' => [
-        'uri' => '/message',
+        'base_url' => '/message',
     ],
 
     /**
@@ -46,7 +46,7 @@ return [
      *
      *  注意! 該網址不能讓外面使用, 在安全上會有問題
      */
-    'private_url' => 'https://localhost/message',
+    'internal_protocol_host' => 'https://localhost',
 
     /**
      *  網站可變動式的加密值

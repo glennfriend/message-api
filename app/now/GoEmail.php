@@ -15,23 +15,12 @@ class GoEmail
         $from = preg_replace('/[^a-zA-Z0-9_\-\@\.]+/', '', $from );
         $to   = preg_replace('/[^a-zA-Z0-9_\-\@\.]+/', '', $to   );
 
-        $txt = $this->createSendTxt($from, $to, $message);
-        $url   = Config::get('app.private_url') . '/go-email-by-file.php';
-        $param = '?do=' . basename($txt);
-        file_get_contents($url.$param);
+        $baseUrl = Config::get('app.internal_protocol_host') . Config::get('app.home.base_url');
 
-        /*
-        $command = Config::get('app.base.path') . '/app/bin/send-mail-by-file.php';
-        $call = "php {$command} {$txt} > /dev/null 2>&1 &";
-        //$call = "phpbrew init; source ~/.phpbrew/bashrc; phpbrew switch php-5.6.6; /root/.phpbrew/php/php-5.6.6/bin/php {$command} {$txt} ";
-        //$call = "at now <<< \"/root/.phpbrew/php/php-5.6.6/bin/php -q {$command} {$txt} \"";
-        //$call = "export PHPBREW_ROOT=/root/.phpbrew; phpbrew use php-5.6.6; php -q  {$command} ";
-        //$call = "/root/.phpbrew/php/php-5.6.6/bin/php -q  {$command} ";
-        echo $call;
-        exec($call,$output,$code);
-        pr($output);
-        pr($code);
-        */
+        $txt = $this->createSendTxt($from, $to, $message);
+        $url   = $baseUrl . '/go-email-by-file.php';
+        $param = '?do=' . basename($txt);
+        $this->curl_post_not_wait($url.$param);
     }
 
     /**
@@ -79,6 +68,33 @@ class GoEmail
             // error
         }
         return 'Error: TimeZone';
+    }
+
+    /**
+     *
+     */
+    private function curl_post_not_wait( $url, Array $post=array() )
+    {
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_POST, TRUE);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $post);
+
+        curl_setopt($curl, CURLOPT_USERAGENT, 'api');
+        curl_setopt($curl, CURLOPT_TIMEOUT, 1);
+        curl_setopt($curl, CURLOPT_HEADER, 0);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, false);
+        curl_setopt($curl, CURLOPT_FORBID_REUSE, true);
+        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 1);
+        curl_setopt($curl, CURLOPT_DNS_CACHE_TIMEOUT, 10);
+        curl_setopt($curl, CURLOPT_FRESH_CONNECT, true);
+
+        if ( 'https' == substr($url,0,5) ) {
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        }
+
+        curl_exec($curl); 
+        curl_close($curl);
     }
 
 }

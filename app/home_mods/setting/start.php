@@ -1,17 +1,19 @@
 <?php
 
+    $baseUrl = Config::get('app.home.base_url');
+
+
     // Create a DI
     // http://phalcon.5iunix.net/reference/di.html
     // $di = new Phalcon\DI\FactoryDefault();
     $di = new Phalcon\DI();
 
-
     // url
     $di->set('escaper', new Phalcon\Escaper );
     $di->set('url', new Phalcon\Mvc\Url );
-    $di->get('url')->setBaseUri( Config::get('app.home.uri') .'/' );
+    $di->get('url')->setBaseUri( $baseUrl .'/' );
     Url::init(array(
-        'baseUri' => Config::get('app.home.uri')
+        'baseUri' => $baseUrl
     ));
 
 
