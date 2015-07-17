@@ -93,7 +93,7 @@ class GoEmail
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         }
 
-        curl_exec($curl); 
+        curl_exec($curl);
         curl_close($curl);
     }
 

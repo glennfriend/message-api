@@ -16,11 +16,6 @@ if ( !Config::init($configPath) ) {
     exit;
 }
 
-// remove it
-//$configFile = $configPath.'/config.php' or die('Please setting "config.php" file');
-//require_once($configFile);
-// remove ↑
-
 // developer mode
 if ('dev'===Config::get('app.env')) {
     error_reporting(E_ALL);
