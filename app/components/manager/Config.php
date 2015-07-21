@@ -21,12 +21,6 @@ class Config
 
         foreach (glob("{$configPath}/*.php") as $file) {
             $filename = basename($file);
-            
-            // remove it
-            if ( $filename == 'config.php' ) {
-                continue;
-            }
-
             $key = substr( $filename, 0, strlen($filename)-4 );
             self::$cf[$key] = include($file);
         }

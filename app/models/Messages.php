@@ -171,7 +171,7 @@ class Messages extends ZendModel
     {
         // validate 欄位 白名單
         $list = array(
-            'room', 'category', 'content', 'createTime', 
+            'channel', 'message', 'createTime', 
             '_order','_page','_itemsPerPage'
         );
         ZendModelHelper::fieldsTriggerError($opt, $list);
@@ -197,5 +197,29 @@ class Messages extends ZendModel
     /* ================================================================================
         extends
     ================================================================================ */
+
+    /**
+     *  取得現在有那些 channel
+     */
+    public function getAllChannel()
+    {
+        $key = 'channel';
+        $select = $this
+            ->getDbSelect()
+            ->columns(array($key))
+            ->group('channel');
+        
+        $result = $this->query($select);
+        if ( !$result ) {
+            return array();
+        }
+
+        $rows = [];
+        $getMethod = $this->getMethod;
+        while( $row = $result->next() ) {
+            $rows[] = $row[$key];
+        };
+        return $rows;
+    }
 
 }

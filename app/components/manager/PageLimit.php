@@ -10,19 +10,20 @@
  */
 class PageLimit
 {
-    protected $_params      = Array();                              // array, 使用者可建立的參數
-    protected $_page        = 1;                                    // 頁數
-    protected $_pageShowCount = Config::get('db.items_per_page');   // 每頁顯示數量
-    protected $_rowCount ;                                          // 資料總筆數
-    protected $_gap         = 5 ;                                   // 間距
-    protected $_baseUrl     = '';                                   // string
-    protected $_customUrl   = null;                                 // 自己訂義的 url
+    protected $_params          = Array();  // array, 使用者可建立的參數
+    protected $_page            = 1;        // 頁數
+    protected $_pageShowCount;              // 每頁顯示數量
+    protected $_rowCount;                   // 資料總筆數
+    protected $_gap             = 5 ;       // 間距
+    protected $_baseUrl         = '';       // string
+    protected $_customUrl       = null;     // 自己訂義的 url
 
     /**
      *  init
      */
     public function __construct()
     {
+        $this->_pageShowCount = Config::get('db.items_per_page');
     }
 
     /**

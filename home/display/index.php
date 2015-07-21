@@ -1,10 +1,10 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
-define('APP_PORTAL','home');
+define('APP_PORTAL','display');
 
 try {
 
-    require_once __DIR__ . '/../app/init.php';
+    require_once __DIR__ . '/../../app/init.php';
     $app = $factoryApplication();
     echo $app->handle()->getContent();
 
@@ -20,4 +20,3 @@ try {
     echo '</p>';
 
 }
-

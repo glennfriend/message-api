@@ -1,5 +1,5 @@
 <?php
-    $homeUri = url('display.php');
+    $homeUri = url('');
 ?>
 <div class="navbar navbar-inverse navbar-static-top">
     <div class="container">

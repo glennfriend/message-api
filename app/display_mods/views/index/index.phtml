@@ -1,0 +1,40 @@
+<?php
+    echo $allChannel;
+
+    $item = InputBrg::get('channel');
+    if ( !$item ) {
+        return;
+    }
+
+?>
+    <table id="table-index" class="table table-striped table-condensed table-bordered">
+        <thead>
+            <tr>
+                <th style="width:55px;">id</th>
+                <th>message     </th>
+                <th>create_time </th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ( $messages as $message ) {
+
+            $view = array();
+            $view['id']         = $message->getId();
+            $view['message']    = escape( $message->getMessage() );
+            $view['createTime'] = cc('datetime', $message->getCreateTime() );
+
+            echo <<<EOD
+                <tr>
+                    <td><div class="fam-application-home"></div>{$view['id']}</td>
+                    <td>{$view['message']}</td>
+                    <td>{$view['createTime']}</td>
+                </tr>
+EOD;
+
+        } ?>
+        </tbody>
+    </table>
+
+
+    <?php echo cc('displayPageLimit', $pageLimit ); ?>
+
