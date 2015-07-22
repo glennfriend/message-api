@@ -1,8 +1,25 @@
 <?php
-    echo $allChannel;
 
-    $item = InputBrg::get('channel');
-    if ( !$item ) {
+    $put = '';
+    foreach ( $allChannel as $channel ) {
+        $active = '';
+        if ( $channel == InputBrg::get('channel') ) {
+            $active = 'active';
+        }
+        $url = url('', array('channel'=>$channel));
+        $put .= '<a href="'. $url .'" class="btn btn-default '. $active .'">'. $channel .'</a>';
+        
+    }
+    
+    if ( $put ) {
+        echo '<div class="btn-toolbar" role="toolbar" aria-label="...">'
+            .   $put
+            . '</div>'
+            . '<br>';
+    }
+
+    //
+    if ( !InputBrg::get('channel') ) {
         return;
     }
 
