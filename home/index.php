@@ -33,8 +33,14 @@ $params = array(
     'c' => '',  // channel
     'm' => '',  // message
 );
-$params = assignParams($_GET, $params);
-$params = assignParams($_POST, $params);
+
+if (PHP_SAPI === 'cli') {
+    $params = assignCliParams($argv, $params);
+}
+else {
+    $params = assignParams($_GET, $params);
+    $params = assignParams($_POST, $params);
+}
 $params = filterParams($params);
 
 if ( !$params['c'] ) {
@@ -84,7 +90,7 @@ exit;
 // --------------------------------------------------------------------------------
 
 /**
- *
+ *  整理 web 進來的變數
  */
 function assignParams( $arr, $params )
 {
@@ -96,6 +102,29 @@ function assignParams( $arr, $params )
     }
     return $params;
 }
+
+/**
+ *  整理 CLI 進來的變數
+ */
+function assignCliParams( $cliArgv, $params )
+{
+    unset($cliArgv[0]);
+
+    foreach ( $cliArgv as $arguments ) {
+
+        $tmp = explode('=', $arguments);
+        $key = $tmp[0];
+        unset($tmp[0]);
+        $value = join('=', $tmp);
+
+        if (!preg_match('/^[a-zA-Z][a-zA-Z0-9_-]*$/', $key)) {
+            continue;
+        }
+        $params[ strtolower($key) ] = trim($value);
+    }
+    return $params;
+}
+
 
 /**
  *

@@ -1,6 +1,6 @@
 Message API
     - 沒有建立密碼機制, 只能 localhost only
-    - use https only
+    - use https & console
     - 有關於特定資料夾 now 的部份
         - 該程式在 now 的部份, 請自行處理資料, 不會存入資料庫
         - 該程式在其它的部份, 主要只收集資料, 資料運用請自行取用再加工
@@ -8,7 +8,7 @@ Message API
         - https://localhost/message/
         - https://localhost/system-message/
 
-使用方式
+https 使用方式
     url get
         https://localhost/message/?c=hello&m=hi
 
@@ -39,6 +39,10 @@ Message API
             curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
             $result = curl_exec($ch);
         curl_close($ch);
+
+console 使用方式
+    php /var/www/message/home/index.php c=hello m=hi
+    php /var/www/message/home/index.php c=apache-log m="$(tail /var/log/apache2/access.log)"
 
 
 Q&A

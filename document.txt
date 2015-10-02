@@ -1,9 +1,17 @@
 document 使用手冊
 
+    send message to channel
+
+        https sample:
+            https://localhost/message/?c=test-channel&m=test-message
+
+        console sample:
+            php /var/www/message/home/index.php c=test-channel m=test-message
+
     send to Hipchat
 
         c (channel) : go-hipchat
-        m (message) : 
+        m (message) :
         room        : hipchat room
         color       : red  or  %23FF0000
         bgcolor     : yellow, green, red, purple, gray, random
