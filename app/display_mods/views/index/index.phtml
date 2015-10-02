@@ -37,7 +37,7 @@
 
             $view = array();
             $view['id']         = $message->getId();
-            $view['message']    = escape( $message->getMessage() );
+            $view['message']    = nl2br(escape( $message->getMessage() ));
             $view['createTime'] = cc('datetime', $message->getCreateTime() );
 
             echo <<<EOD
