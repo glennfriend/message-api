@@ -33,8 +33,8 @@ class GoEmail
 
         $mailContentFooter = "\n--------------------\n"
                            . $this->showTime('America/Los_Angeles') . "\n"
-                           . $this->showTime('UTC') . "\n"
-                           . $this->showTime('Asia/Taipei') . "\n";
+                           . $this->showTime('UTC')                 . "\n"
+                           . $this->showTime('Asia/Taipei')         . "\n";
 
         $info = array(
             'from'      => $from,
