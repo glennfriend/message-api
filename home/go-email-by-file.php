@@ -61,8 +61,16 @@ function getTxt()
     $txt = $_GET['do'];
 
     // security check
-    // TODO: please check a-zA-Z0-9 @ 一個 .
-    // 未完成
+    if ( false !== strpos($txt, '..') ) {
+        toLog("validate fail - {$txt}");
+        exit;
+    }
+
+    // security check
+    if (!preg_match('/^[a-z0-9_@\-\.]+$/i', $txt)) {
+        toLog("validate fail - {$txt}");
+        exit;
+    }
 
     return $txt;
 }
